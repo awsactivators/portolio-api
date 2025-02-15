@@ -1,0 +1,94 @@
+doctype html
+html
+  head
+    title Admin Panel
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/css/styles.css")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
+  body
+    div.container.admin-container
+      h1 Admin Panel - Manage Projects
+
+      //- Success and Error Notifications
+      if successMessage
+        div.alert.alert-success(role="alert")= successMessage
+      if errorMessage
+        div.alert.alert-danger(role="alert")= errorMessage
+
+      //- Logout Button
+      a.btn.btn-danger.btn-logout(href="/auth/logout") Logout
+
+      form(action="/admin/add" method="POST")
+        div.mb-3
+          label(for="title") Project Title: 
+          input.form-control(type="text" name="title" id="title" required)
+
+        div.mb-3
+          label(for="description") Description:
+          textarea.form-control(name="description" id="description" required)
+
+        div.mb-3
+          label(for="techStack") Tech Stack:
+          input.form-control(type="text" name="techStack" id="techStack")
+
+        div.mb-3
+          label(for="githubLink") Link:
+          input.form-control(type="url" name="githubLink" id="githubLink")
+
+        div.mb-3
+          label(for="category") Category:
+          select.form-control(name="category" id="category" required)
+            option(value="devops") DevOps
+            option(value="software") Software
+
+        button.btn.btn-primary(type="submit") Add Project
+
+      h2.mt-5 Existing Projects
+      each project in projects
+        div.project-card
+          h3= project.title
+          p= project.description
+          p Tech Stack: #{project.techStack}
+          p GitHub: 
+            a(href=project.githubLink target="_blank") #{project.githubLink}
+
+          //- Edit and Delete Buttons
+          div.btn-group
+              a.btn.btn-warning.btn-edit(href="/admin/edit/" + project._id) Edit
+              button.btn.btn-danger.btn-delete(data-bs-toggle="modal" data-bs-target="#deleteModal" data-project-id=project._id) Delete
+
+    //- Delete confirm modal
+    div.modal.fade#deleteModal(tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true")
+      div.modal-dialog
+        div.modal-content
+          div.modal-header
+            h5.modal-title#deleteModalLabel Confirm Deletion
+            button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+          div.modal-body
+            p Are you sure you want to delete this project?
+          div.modal-footer
+            button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Cancel
+            form#deleteForm(method="POST")
+              button.btn.btn-danger(type="submit") Yes, Delete
+
+  //- Modal script
+  script.
+    document.addEventListener("DOMContentLoaded", function () {
+      var deleteModal = document.getElementById("deleteModal");
+      deleteModal.addEventListener("show.bs.modal", function (event) {
+        var button = event.relatedTarget;
+        var projectId = button.getAttribute("data-project-id");
+        var deleteForm = document.getElementById("deleteForm");
+
+        deleteForm.action = "/admin/delete/" + projectId;
+      });
+
+      // Hide success or error messages after 10 seconds
+      setTimeout(function () {
+        var alertElements = document.querySelectorAll(".alert");
+        alertElements.forEach(function (alert) {
+          alert.style.display = "none";
+        });
+      }, 10000);
+    });
+
