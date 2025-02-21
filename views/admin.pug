@@ -27,7 +27,7 @@ html
             h3= project.title
             p= project.description
             p.tech-stack #[strong Tech Stack:] #{project.techStack}
-            p #[strong GitHub:] 
+            p #[strong Link:] 
               a.links(href=project.githubLink target="_blank") #{project.githubLink}
             div.btn-group
               a.btn.btn-warning.btn-edit(href="/admin/edit-project/" + project._id) Edit
@@ -53,7 +53,7 @@ html
 
             p.tech-stack #[strong Tech Stack:] #{post.techStack}
             if post.links
-              p #[strong Links:] 
+              p #[strong Link:] 
                 a.links(href=post.links target="_blank") #{post.links}
 
             div.btn-group

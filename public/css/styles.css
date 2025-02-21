@@ -32,6 +32,7 @@ body {
   padding-bottom: 20px;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
+  margin-bottom: 10px;
 }
 
 h1 {
@@ -283,13 +284,13 @@ input, textarea, select {
 }
 
 .alert-success {
-  background: #d4edda;
-  color: #155724;
+  background: #46a45c;
+  color: #fff;
 }
 
 .alert-danger {
-  background: #f8d7da;
-  color: #721c24;
+  background: #ab3844;
+  color: #fff;
 }
 
 
@@ -347,7 +348,7 @@ input, textarea, select {
 }
 
 .modal-header {
-  background: #dc3545;
+  background: #d85910;
   color: #fff;
   border-bottom: none;
 }
@@ -358,7 +359,7 @@ input, textarea, select {
 }
 
 .modal-footer .btn-danger {
-  background: #dc3545;
+  background: #d85910;
   border: none;
 }
 
