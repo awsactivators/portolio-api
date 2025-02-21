@@ -26,9 +26,11 @@ router.post("/register", async (req, res) => {
   const success = await addAdmin(username, password);
 
   if (success) {
-    res.redirect("/auth/login"); 
+    req.session.successMessage = "Registration successful! Please log in.";
+    res.redirect("/auth/login");
   } else {
-    res.send("Admin already exists. Try logging in.");
+    req.session.errorMessage = "Admin already exists. Try logging in.";
+    res.redirect("/auth/login");
   }
 });
 
@@ -36,7 +38,13 @@ router.post("/register", async (req, res) => {
 
 // Render Login Page
 router.get("/login", (req, res) => {
-  res.render("login", { error: null });
+  const successMessage = req.session.successMessage || null;
+  const errorMessage = req.session.errorMessage || null;
+
+  req.session.successMessage = null;
+  req.session.errorMessage = null;
+
+  res.render("login", { successMessage, errorMessage });
 });
 
 // Login Admin

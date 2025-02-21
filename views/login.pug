@@ -8,9 +8,10 @@ html
     div.container
       h1 Login
 
-      // Display error message if it exists
-      if error
-        div.alert.alert-danger(role="alert")= error
+      if successMessage
+        div.alert.alert-success(role="alert")= successMessage
+      if errorMessage
+        div.alert.alert-danger(role="alert")= errorMessage
 
       form(action="/auth/login" method="POST")
         div.mb-3
