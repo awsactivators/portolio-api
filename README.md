@@ -1,6 +1,6 @@
 # **Admin Project Management System**
 
-Render Url: [Render](https://portolio-api-wsal.onrender.com)
+Project Live Url: [Portfolio API](https://portolio-api-wsal.onrender.com)
 
 ## **📌 Overview**
 This project is an **Admin Project Management System** built with **Node.js, Express, MongoDB, and Pug**. It allows administrators to **create, edit, delete, and manage projects** securely with authentication.
@@ -61,8 +61,8 @@ This project is an **Admin Project Management System** built with **Node.js, Exp
 
 ### **1️⃣ Clone the Repository**
 ```sh
- git clone https://github.com/awsactivators/portfolio-api.git
- cd portfolio-api
+ git clone https://github.com/awsactivators/portolio-api
+ cd portolio-api
 ```
 
 ### **2️⃣ Install Dependencies**
@@ -93,10 +93,10 @@ This project uses MongoDB Atlas, but you can use a local MongoDB instance as wel
 
 
 
-### **3️4️⃣ Set Up Environment Variables**
+### **4️⃣ Set Up Environment Variables**
 Create a `.env` file in the root directory and add the following:
 ```sh
-PORT=5005
+PORT=port-of-your-choice
 SESSIONSECRET=your-secret-key
 DBUSER=your-mongodb-user
 DBPWD=your-mongodb-password
@@ -110,7 +110,7 @@ SALT=your-salt-key
  npm run dev
 ```
 
-The server will start at **`http://localhost:5005`**.
+The server will start at **`http://localhost:<port>`**.
 
 ---
 
