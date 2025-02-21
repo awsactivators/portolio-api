@@ -1,5 +1,7 @@
 # **Admin Project Management System**
 
+Render Url: [Render](https://www.mongodb.com/products/platform/atlas-database)
+
 ## **📌 Overview**
 This project is an **Admin Project Management System** built with **Node.js, Express, MongoDB, and Pug**. It allows administrators to **create, edit, delete, and manage projects** securely with authentication.
 
@@ -35,13 +37,17 @@ This project is an **Admin Project Management System** built with **Node.js, Exp
 ├── models/             # Database models
 │   ├── Admin.js        # Admin schema & authentication logic
 │   ├── Project.js      # Project schema
+|   ├── Post.js         # Project schema
 ├── views/              # Pug templates for frontend rendering
 │   ├── admin.pug       # Admin dashboard
 │   ├── login.pug       # Admin login page
 │   ├── register.pug    # Admin registration page
-│   ├── edit.pug        # Edit project form
+│   ├── add-post.pug    # Add post form
+│   ├── add-project.pug # Add project form
+│   ├── edit-project.pug# Edit project form
+│   ├── edit-post.pug   # Edit post form
 ├── middleware/         # Middleware functions
-│   ├── authMiddleware.js  # Authentication middleware
+│   ├── authMiddleware.js# Authentication middleware
 ├── db.js               # MongoDB connection logic
 ├── index.js            # Main application entry point
 ├── .env                # Environment variables (ignored in Git)
@@ -120,21 +126,29 @@ The server will start at **`http://localhost:5005`**.
 ---
 
 ## **📌 Admin Routes (Protected)**
-| Method | Route | Description |
-|--------|-------|-------------|
-| GET | `/admin` | Admin dashboard |
-| POST | `/admin/add` | Add a new project |
-| GET | `/admin/edit/:id` | Render project edit form |
-| POST | `/admin/edit/:id` | Update project details |
-| POST | `/admin/delete/:id` | Delete a project |
+| Method  | Route                     | Description |
+| --------|----------------------------|------------- |
+| GET     | `/admin`                   | Admin dashboard |
+| POST    | `/admin/add-project`        | Add a new project |
+| GET     | `/admin/edit-project/:id`   | Render project edit form |
+| POST    | `/admin/edit-project/:id`   | Update project details |
+| POST    | `/admin/delete-project/:id` | Delete a project |
+| POST    | `/admin/add-post`           | Publish a new post |
+| GET     | `/admin/edit-post/:id`      | Render post edit form |
+| POST    | `/admin/edit-post/:id`      | Update post details |
+| POST    | `/admin/delete-post/:id`    | Delete a post |
+
 
 ---
 
 ## **📡 API Endpoints**
-| Method | Route | Description |
-|--------|-------|-------------|
-| GET | `/api/projects` | Get all projects |
-| GET | `/api/projects/:category` | Get projects by category (devops/software) |
+| Method  | Route                 | Description |
+| --------|------------------------|------------- |
+| GET     | `/api/projects`        | Get all projects |
+| GET     | `/api/projects/:category` | Get projects by category (devops/software) |
+| GET     | `/api/posts`           | Get all posts |
+| GET     | `/api/posts/:id`       | Get a single post by ID |
+
 
 ---
 
