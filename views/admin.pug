@@ -29,6 +29,7 @@ html
             p.tech-stack #[strong Tech Stack:] #{project.techStack}
             p #[strong Link:] 
               a.links(href=project.githubLink target="_blank") #{project.githubLink}
+            p #[strong Category:] #{project.category}
             div.btn-group
               a.btn.btn-warning.btn-edit(href="/admin/edit-project/" + project._id) Edit
               button.btn.btn-danger.delete-btn(data-bs-toggle="modal" data-bs-target="#deleteModal" data-id=project._id data-type="project") Delete
