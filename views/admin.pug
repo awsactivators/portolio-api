@@ -55,13 +55,13 @@ html
             div.post-content
               if post.body.length > 200
                 div.short-text
-                  != post.body.substring(0, 200) + "... "
+                  != post.body.substring(0, 200).replace(/<img /g, '<img class="responsive-img" ') + "... "
                   button.btn.btn-link.read-more-btn(type="button") Read More
                 div.full-text(style="display:none;")
-                  != post.body
+                  != post.body.replace(/<img /g, '<img class="responsive-img" ')
                   button.btn.btn-link.read-less-btn(type="button" style="display:none;") Read Less
               else
-                p!= post.body
+                p!= post.body.replace(/<img /g, '<img class="responsive-img" ')
 
             p.tech-stack #[strong Tech Stack:] #{post.techStack}
             if post.links
@@ -72,7 +72,7 @@ html
               a.btn.btn-warning.btn-edit(href="/admin/edit-post/" + post._id) Edit
               button.btn.btn-danger.delete-btn(data-bs-toggle="modal" data-bs-target="#deleteModal" data-id=post._id data-type="post") Delete
       else
-        p No projects added yet.
+        p No posts added yet.
 
       //- Post Pagination
       if totalPostPages > 1
