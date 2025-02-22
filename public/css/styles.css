@@ -404,6 +404,36 @@ a:hover {
 }
 
 
+/* ======= Paignation ======= */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination a {
+  text-decoration: none;
+  padding: 8px 16px;
+  background-color: #2d545e;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover {
+  background-color: #1e3b44;
+}
+
+.pagination span {
+  padding: 8px 16px;
+  font-weight: bold;
+  background-color: #e1b382;
+  color: black;
+  border-radius: 5px;
+}
+
+
+
 
 /* ======= Responsive Design ======= */
 @media (max-width: 768px) {

@@ -4,17 +4,55 @@ const Project = require("../models/Project");
 const Post = require("../models/Post");
 const { isAuthenticated } = require("../middleware/authMiddleware");
 
+// Paignation for 4 post/project on the page
+const ITEMS_PER_PAGE = 4;
+
+
 // Admin Panel - Show Dashboard (Projects & Posts)
 router.get("/", isAuthenticated, async (req, res) => {
-  const projects = await Project.find();
-  const posts = await Post.find();
-  const successMessage = req.session.successMessage || null;
-  const errorMessage = req.session.errorMessage || null;
+  try {
+    // Get the current page number from query params or default to 1
+    const projectPage = parseInt(req.query.projectPage) || 1;
+    const postPage = parseInt(req.query.postPage) || 1;
 
-  req.session.successMessage = null;
-  req.session.errorMessage = null;
+    // Count total number of projects and posts
+    const totalProjects = await Project.countDocuments();
+    const totalPosts = await Post.countDocuments();
 
-  res.render("admin", { projects, posts, successMessage, errorMessage });
+    // Fetch paginated projects
+    const projects = await Project.find()
+      .skip((projectPage - 1) * ITEMS_PER_PAGE)
+      .limit(ITEMS_PER_PAGE);
+
+    // Fetch paginated posts
+    const posts = await Post.find()
+      .skip((postPage - 1) * ITEMS_PER_PAGE)
+      .limit(ITEMS_PER_PAGE);
+
+    // Fetch success & error messages from session
+    const successMessage = req.session.successMessage || null;
+    const errorMessage = req.session.errorMessage || null;
+
+    // Clear session messages after rendering
+    req.session.successMessage = null;
+    req.session.errorMessage = null;
+
+    // Render admin panel with pagination data
+    res.render("admin", {
+      projects,
+      posts,
+      successMessage,
+      errorMessage,
+      projectPage,
+      postPage,
+      totalProjectPages: Math.ceil(totalProjects / ITEMS_PER_PAGE),
+      totalPostPages: Math.ceil(totalPosts / ITEMS_PER_PAGE),
+    });
+
+  } catch (error) {
+    console.error("Pagination Error:", error);
+    res.status(500).send("Server Error");
+  }
 });
 
 

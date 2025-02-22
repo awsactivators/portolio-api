@@ -20,6 +20,7 @@ html
       if errorMessage
         div.alert.alert-danger(role="alert")= errorMessage
 
+      //- Projects Section
       h2.mt-5 Projects
       if projects.length > 0
         each project in projects
@@ -36,6 +37,16 @@ html
       else
         p No projects added yet.
 
+      //- Project Pagination
+      if totalProjectPages > 1
+        div.pagination
+          if projectPage > 1
+            a.btn.btn-secondary(href=`/admin?projectPage=${projectPage - 1}&postPage=${postPage}`) Prev
+          span Page #{projectPage} of #{totalProjectPages}
+          if projectPage < totalProjectPages
+            a.btn.btn-secondary(href=`/admin?projectPage=${projectPage + 1}&postPage=${postPage}`) Next
+
+      //- Post Section
       h2.mt-5 Blog Posts
       if posts.length > 0
         each post in posts
@@ -60,6 +71,17 @@ html
             div.btn-group
               a.btn.btn-warning.btn-edit(href="/admin/edit-post/" + post._id) Edit
               button.btn.btn-danger.delete-btn(data-bs-toggle="modal" data-bs-target="#deleteModal" data-id=post._id data-type="post") Delete
+      else
+        p No projects added yet.
+
+      //- Post Pagination
+      if totalPostPages > 1
+        div.pagination
+          if postPage > 1
+            a.btn.btn-secondary(href=`/admin?projectPage=${projectPage}&postPage=${postPage - 1}`) Prev
+          span Page #{postPage} of #{totalPostPages}
+          if postPage < totalPostPages
+            a.btn.btn-secondary(href=`/admin?projectPage=${projectPage}&postPage=${postPage + 1}`) Next
 
 
     //- Delete Confirm Modal
