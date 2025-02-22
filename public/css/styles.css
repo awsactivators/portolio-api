@@ -41,11 +41,6 @@ h1 {
   margin: 0;
 }
 
-.btn-group.add-group {
-  display: flex;
-  gap: 15px;
-}
-
 
 
 /* ======= Buttons Styling ======= */
@@ -56,6 +51,11 @@ h1 {
   border-radius: 6px;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
+}
+
+.btn-group.add-group {
+  display: flex;
+  gap: 15px;
 }
 
 .btn-edit {
@@ -89,6 +89,10 @@ a.add:hover, a.btn-cancel:hover {
 
 .add-posts:hover, .add-proj:hover {
   background-color: #12343b;
+}
+
+.add-posts:active, .add-proj:active {
+  background-color: #12343b !important;
 }
 
 .edit-p, .login-btn, .register-btn {
